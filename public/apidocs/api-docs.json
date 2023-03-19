@@ -4,10 +4,6 @@
   "basePath": "http://localhost:3000",
   "apis": [
     {
-      "path": "/apidocs/owners.{format}",
-      "description": "Owner Management"
-    },
-    {
       "path": "/apidocs/animals.{format}",
       "description": "Animal Management"
     },

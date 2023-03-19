@@ -37,6 +37,7 @@ class Pet < ApplicationRecord
   # find all pets that have a name like some term or are and animal like some term
   scope :search, ->(term) { joins(:animal).where('pets.name LIKE ?', "#{term}%").order("pets.name") }
 
+  scope :active, -> {where(active: true)}
 
   # Validations
   # -----------------------------
@@ -47,9 +48,9 @@ class Pet < ApplicationRecord
   # First, make sure a name exists
   validates :name, presence: true
   # Second, make sure the animal is one of the types PATS treats
-  validate :animal_type_treated_by_PATS
+  # validate :animal_type_treated_by_PATS
   # Third, make sure the owner_id is in the PATS system 
-  validate :owner_is_active_in_PATS_system
+  # validate :owner_is_active_in_PATS_system
   
 
   # Misc Methods and Constants
@@ -74,13 +75,13 @@ class Pet < ApplicationRecord
   # Use private methods to execute the custom validations
   # -----------------------------
   private
-  def animal_type_treated_by_PATS
-    is_active_in_system(:animal)
-  end
+  # def animal_type_treated_by_PATS
+  #   is_active_in_system(:animal)
+  # end
   
-  def owner_is_active_in_PATS_system
-    is_active_in_system(:owner)
-  end
+  # def owner_is_active_in_PATS_system
+  #   is_active_in_system(:owner)
+  # end
 
   def make_pet_inactive
     return true unless self.destroyable == false
