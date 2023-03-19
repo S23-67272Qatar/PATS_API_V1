@@ -60,7 +60,8 @@ class PetsController < ApplicationController
 
 
   def show
-    render json: @pet
+    render json: PetSerializer.new(@pet).serialized_json
+    # render json: @pet
   end
 
   def create

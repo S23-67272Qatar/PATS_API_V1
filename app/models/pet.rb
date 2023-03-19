@@ -38,7 +38,7 @@ class Pet < ApplicationRecord
   scope :search, ->(term) { joins(:animal).where('pets.name LIKE ?', "#{term}%").order("pets.name") }
 
   scope :active, -> {where(active: true)}
-
+  scope :inactive, -> {where(active: false)}
   # Validations
   # -----------------------------
   # System note:   not requiring DOB because may not be known (e.g., adopted pet)
