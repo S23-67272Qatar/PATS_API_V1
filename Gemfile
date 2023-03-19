@@ -47,7 +47,7 @@ gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'bootsnap', require: false
 
 # For serializing models to json for the API
-gem 'fast_jsonapi', '1.5'
+gem 'fast_jsonapi'
 
 # Other gems
 gem 'time_date_helpers', '0.0.4'
