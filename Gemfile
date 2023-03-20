@@ -49,6 +49,8 @@ gem 'bootsnap', require: false
 # For serializing models to json for the API
 gem 'fast_jsonapi'
 
+gem 'rack-cors'
+
 # Other gems
 gem 'time_date_helpers', '0.0.4'
 gem 'cancancan'

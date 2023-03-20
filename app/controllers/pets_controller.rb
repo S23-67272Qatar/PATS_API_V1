@@ -54,14 +54,15 @@ class PetsController < ApplicationController
 
 
   def index
-    @active_pets = Pet.active.alphabetical    
-    render json: @active_pets
+    @pets = Pet.all    
+    # render json: @pets
+    render json: PetSerializer.new(@pets)
   end
 
 
   def show
-    render json: PetSerializer.new(@pet).serialized_json
     # render json: @pet
+    render json: PetSerializer.new(@pet)
   end
 
   def create

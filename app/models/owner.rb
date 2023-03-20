@@ -18,6 +18,8 @@ class Owner < ApplicationRecord
   # search for all the owners in the system by either first or last name
   scope :search, ->(term) { where('first_name LIKE ? OR last_name LIKE ?', "#{term}%", "#{term}%") }
 
+  scope :active, -> {where(active: true)}
+
   # Misc Constants
   # -----------------------------
   # This is a local vet shop, but it is possible to have people coming from WV and OH as well
@@ -63,13 +65,13 @@ class Owner < ApplicationRecord
   # create a callback that will strip non-digits before saving to db
   before_save :reformat_phone
 
-  # don't allow any owners to be destroyed
-  before_destroy do 
-    cannot_destroy_object()
-  end
+  # # don't allow any owners to be destroyed
+  # before_destroy do 
+  #   cannot_destroy_object()
+  # end
 
-  # convert destroy call to make inactive
-  after_rollback :deactive_owner_user_and_pets
+  # # convert destroy call to make inactive
+  # after_rollback :deactive_owner_user_and_pets
 
   # a final callback to reactivate user account if owner is made active
   before_update do
