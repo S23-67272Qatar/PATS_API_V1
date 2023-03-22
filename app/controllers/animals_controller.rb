@@ -42,8 +42,15 @@ class AnimalsController < ApplicationController
 
   before_action :set_animal, only: [:show, :update, :destroy]
 
+  # def index
+  #   @animals = Animal.alphabetical.all
+  #   render json: @animals
+  # end
   def index
-    @animals = Animal.alphabetical.all
+    @animals = Animal.all
+    if params[:alphabetical].present? && params[:alphabetical] == "true"
+      @animals = @animals.alphabetical
+    end
     render json: @animals
   end
 

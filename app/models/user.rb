@@ -7,6 +7,10 @@ class User < ApplicationRecord
   # has_many :notes
   has_one :owner
 
+  before_create :generate_api_key
+
+ 
+
   # Validations
   # make sure required fields are present
   validates_presence_of :first_name, :last_name 
@@ -39,5 +43,10 @@ class User < ApplicationRecord
   def self.authenticate(username, password)
     find_by_username(username).try(:authenticate, password)
   end
-
+ private
+ def generate_api_key
+  begin
+    self.api_key = SecureRandom.hex
+  end while User.exists?(api_key: self.api_key)
+end
 end

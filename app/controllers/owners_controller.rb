@@ -60,10 +60,22 @@ class OwnersController < ApplicationController
   # Actual controller code
   before_action :set_owner, only: [:show, :update, :destroy]
 
+
   def index
-    @active_owners = Owner.active.alphabetical.all
-    render json: OwnerSerializer.new(@active_owners)
+    @owners = Owner.all
+    if(params[:active].present?)
+      @owners = params[:active] == "true" ? @owners.active : @owners.inactive
+    end
+    if params[:alphabetical].present? && params[:alphabetical] == "true"
+      @owners = @owners.alphabetical
+    end
+    render json: @owners
   end
+
+  # def index
+  #   @active_owners = Owner.active.alphabetical.all
+  #   render json: OwnerSerializer.new(@active_owners)
+  # end
 
   def show
     render json: OwnerSerializer.new(@owner)

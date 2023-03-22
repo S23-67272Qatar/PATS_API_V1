@@ -19,9 +19,7 @@ module PATSApi
     # CORS code
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        
         origins '*'
-        
         # Notice the code :methods => [:get, :post, :put], this is how rack-cors will be able to whitelist certain types of request. 
         # For example, if you don't want anyone from another domain to make post requests (or create new things) to your API, then remove that. 
         # If you want to allow them to make delete requests, then add it in like this: :methods => [:get, :post, :put, :delete].

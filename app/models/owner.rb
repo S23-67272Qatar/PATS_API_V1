@@ -20,6 +20,9 @@ class Owner < ApplicationRecord
 
   scope :active, -> {where(active: true)}
 
+  scope :inactive, -> {where(active: false)}
+
+
   # Misc Constants
   # -----------------------------
   # This is a local vet shop, but it is possible to have people coming from WV and OH as well

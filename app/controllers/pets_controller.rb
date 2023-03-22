@@ -53,10 +53,20 @@ class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :update, :destroy]
 
 
+  # def index
+  #   @pets = Pet.all    
+  #   # render json: @pets
+  #   render json: PetSerializer.new(@pets)
+  # end
   def index
-    @pets = Pet.all    
-    # render json: @pets
-    render json: PetSerializer.new(@pets)
+    @pets = Pet.all
+    if(params[:active].present?)
+      @pets = params[:active] == "true" ? @pets.active : @pets.inactive
+    end
+    if params[:alphabetical].present? && params[:alphabetical] == "true"
+      @pets = @pets.alphabetical
+    end
+    render json: @pets
   end
 
 
